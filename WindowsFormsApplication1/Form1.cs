@@ -29,7 +29,7 @@ namespace WindowsFormsApplication1
             String url_prefix = "http://easycw.sinaapp.com/index.php/mytest/getOurUri/";
             try {
 
-
+                int x;
 
                 reqFTP.Method = "POST";
                 reqFTP.ContentLength = fio.Length;
