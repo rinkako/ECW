@@ -1,0 +1,10 @@
+﻿<Window x:Class="ECWClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="564" AllowsTransparency="True" Background="Transparent" WindowStyle="None"
+        MouseDown="Window_MouseDown">
+    <Grid>
+        <Image Source="BackgNew.png"/>
+        <Button Name="Button_close" Click="Button_close_Click" Content="" HorizontalAlignment="Left" Margin="482,104,0,0" VerticalAlignment="Top" Width="37" Height="37" Opacity="0"/>
+    </Grid>
+</Window>
