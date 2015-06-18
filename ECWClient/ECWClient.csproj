@@ -89,6 +89,14 @@
   <ItemGroup>
     <Resource Include="BackgNew.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Button_Mainpage_01.png" />
+    <Resource Include="Button_Mainpage_02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Button_Mainpage_01_unable.png" />
+    <Resource Include="Button_Mainpage_02_unable.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

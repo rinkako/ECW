@@ -36,5 +36,15 @@ namespace ECWClient
         {
             Environment.Exit(0);
         }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Image_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            button_share.Source = new BitmapImage(new Uri(@"Button_Mainpage_01_unable.png", UriKind.Relative));
+        }
     }
 }
