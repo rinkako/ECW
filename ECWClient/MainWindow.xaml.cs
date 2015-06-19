@@ -52,7 +52,7 @@ namespace ECWClient
             if (res != null)
             {
 
-            }
+        }
         }
 
         // 分享文件
@@ -87,8 +87,15 @@ namespace ECWClient
         {
             if (e.ChangedButton == MouseButton.Left)
             {
+                try
+                {
                 this.DragMove();
             }
+                catch (Exception ex)
+                {
+                    // HERE PREVENT STOP BY SUB WIN MOUSE
+                }
+        }
         }
 
         // 关闭按钮点击事件

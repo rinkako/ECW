@@ -4,7 +4,7 @@
         Title="MainWindow" Height="450" Width="564" AllowsTransparency="True" Background="Transparent" WindowStyle="None"
         MouseDown="Window_MouseDown">
     <Grid>
-        <Image Source="BackgNew.png"/>
+        <Image Source="imageAssets/BackgNew.png"/>
         <Button Name="Button_close" Click="Button_close_Click" Content="" HorizontalAlignment="Left" Margin="482,104,0,0" VerticalAlignment="Top" Width="37" Height="37" Opacity="0"/>
         <Image Name="button_share" HorizontalAlignment="Left" MouseDown="Image_MouseDown" Height="38" Margin="253,359,0,0" VerticalAlignment="Top" Width="141" Source="Button_Mainpage_01.png"/>
         <Image HorizontalAlignment="Left" MouseDown="Image_MouseDown_1" Height="38" VerticalAlignment="Top" Width="100" Margin="399,359,0,0" Source="Button_Mainpage_02.png"/>
