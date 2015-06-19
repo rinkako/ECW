@@ -28,7 +28,14 @@ namespace ECWClient
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                this.DragMove();
+                try
+                {
+                    this.DragMove();
+                }
+                catch (Exception ex)
+                {
+                    // HERE PREVENT STOP BY SUB WIN MOUSE
+                }
             }
         }
 
@@ -44,7 +51,10 @@ namespace ECWClient
 
         private void Image_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
-            button_share.Source = new BitmapImage(new Uri(@"Button_Mainpage_01_unable.png", UriKind.Relative));
+            this.Hide();
+            PreDownPage pdp = new PreDownPage();
+            pdp.ShowDialog();
+            this.Show();
         }
     }
 }
