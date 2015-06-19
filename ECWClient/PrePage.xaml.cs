@@ -47,12 +47,6 @@ namespace ECWClient
             }
         }
 
-        // 关闭程序
-        private void Button_close_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
         // 返回，关闭窗体
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -116,6 +110,11 @@ namespace ECWClient
         private void CallBackDownload(IAsyncResult result)
         {
 
+        }
+
+        private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
