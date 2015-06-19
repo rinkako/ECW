@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
 using System.Threading;
+using System.IO;
 
 namespace ECWClient
 {
@@ -175,6 +176,17 @@ namespace ECWClient
             }
             // 获取拖放的文件名及路径
             Array files = (System.Array)e.Data.GetData(DataFormats.FileDrop);
+            // 判断是否有文件夹
+            for (int i = 0; i < files.Length; i++)
+            {
+                if (Directory.Exists(files.GetValue(i).ToString()))
+                {
+                    
+                    MessageBox.Show("请不要上传文件夹");
+                    
+                    return;
+                }
+            }
             // 放置到后台
             ssv.SetFiles(files);
             // 开放分享按钮

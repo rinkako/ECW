@@ -5,10 +5,10 @@
         MouseDown="Window_MouseDown">
     <Grid>
         <Image Source="imageAssets/BackGndPre.png"/>
-        <Button Name="Button_close" Content="" HorizontalAlignment="Left" Margin="482,104,0,0" VerticalAlignment="Top" Width="37" Height="37" Opacity="0"/>
+        <Button Name="Button_close" Content="" HorizontalAlignment="Left" Margin="482,104,0,0" VerticalAlignment="Top" Width="37" Height="37" Opacity="0" MouseDown="Button_close_MouseDown"/>
         <TextBox VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="165" Margin="125,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Text="没有文件" IsReadOnly="True"/>
         <ProgressBar HorizontalAlignment="Left" Height="15" Margin="125,379,0,0" VerticalAlignment="Top" Width="383"/>
-        <Image HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="100" Margin="408,328,0,0" Source="imageAssets/Button_Predown_02.png"/>
-        <Image HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="100" Margin="408,290,0,0" Source="imageAssets/Button_Predown_01.png"/>
+        <Image HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="100" Margin="408,328,0,0" Source="imageAssets/Button_Predown_02.png" MouseDown="Image_MouseDown_1"/>
+        <Image HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="100" Margin="408,290,0,0" Source="imageAssets/Button_Predown_01.png" MouseDown="Image_MouseDown"/>
     </Grid>
 </Window>
