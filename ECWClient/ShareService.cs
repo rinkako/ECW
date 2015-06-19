@@ -168,7 +168,10 @@ namespace ECWClient
             if (_file_num == 1)
             {
                 int idx = target.LastIndexOf('.');
-                target = target.Substring(0, idx) + "-" + DateTime.Now.ToString("yyyy-MM-dd HH-mm") + target.Substring(idx);
+                if (idx == -1)
+                    target += "-" + DateTime.Now.ToString("yyyy-MM-dd HH-mm");
+                else
+                    target = target.Substring(0, idx) + "-" + DateTime.Now.ToString("yyyy-MM-dd HH-mm") + target.Substring(idx);
             }
             // 上传ftp-url
             _url = "ftp://" + hostname + "/" + targetDir + "/" + target;

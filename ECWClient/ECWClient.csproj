@@ -122,6 +122,9 @@
     <Resource Include="imageAssets\Button_Predown_01.png" />
     <Resource Include="imageAssets\Button_Predown_02.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imageAssets\Button_Mainpage_03.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

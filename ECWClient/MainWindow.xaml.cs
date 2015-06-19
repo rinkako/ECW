@@ -26,33 +26,49 @@ namespace ECWClient
         // 声明委托
         public delegate string ShareFiles();
         // 标记分享按钮是否可点击
-        private bool isShare = false;
+        private byte isShare = 0;   // 0-不可点击 1-点击上传 2-点击复位
         // 记录课室
         private string _classroom;
+        // 
+        SynchronizationContext syncContext = null;
 
         public MainWindow(string classroom)
         {
             InitializeComponent();
+            syncContext = SynchronizationContext.Current;
             // 设置课室
             label_room.Content = "课室： " + classroom;
             _classroom = classroom;
             // 允许拖放
             label_drag.AllowDrop = true;
             // 分享按钮不可点击
-            isShare = false;
+            isShare = 0;
             button_share.Source = new BitmapImage(
                 new Uri(@"imageAssets/Button_Mainpage_01_unable.png", UriKind.Relative));
         }
 
-        private void reset()
+        private void ShareCode(object text)
         {
             // 清空上传文件
             ssv.Initialize();
             // 按钮复位
-            isShare = true;
+            isShare = 2;
             button_share.Source = new BitmapImage(
-                new Uri(@"imageAssets/Button_Mainpage_01.png", UriKind.Relative));
-            label_drag.Content = "拖放文件到此处";
+                new Uri(@"imageAssets/Button_Mainpage_03.png", UriKind.Relative));
+            label_drag.Content = Convert.ToString(text);
+            label_drag.Foreground = new SolidColorBrush(Colors.Red);
+            label_drag.FontSize = 28;
+        }
+
+        private void Fail(object o)
+        {
+            // 清空上传文件
+            ssv.Initialize();
+            // 按钮复位
+            isShare = 2;
+            button_share.Source = new BitmapImage(
+                new Uri(@"imageAssets/Button_Mainpage_03.png", UriKind.Relative));
+            label_drag.Content = Convert.ToString(o);
         }
 
         // 异步回调函数
@@ -65,8 +81,11 @@ namespace ECWClient
             // 上传成功则显示分享码
             if (res != null)
             {
-                MessageBox.Show(res);
-                reset();
+                syncContext.Post(ShareCode, res);
+            }
+            else
+            {
+                syncContext.Post(Fail, "上传失败");
             }
         }
 
@@ -120,25 +139,31 @@ namespace ECWClient
         // 分享按钮点击事件
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (isShare == false) return;
+            if (isShare == 0) return;
+
+            if (isShare == 2)
+            {   // 复位
+                isShare = 0;
+                label_drag.Foreground = new SolidColorBrush(Color.FromRgb(28, 149, 205));
+                label_drag.FontSize = 16;
+                label_drag.Content = "拖放文件到此处";
+                label_drag.AllowDrop = true;
+                button_share.Source = new BitmapImage(
+                new Uri(@"imageAssets/Button_Mainpage_01_unable.png", UriKind.Relative));
+                return;
+            }
 
             // 分享文件, 异步上传
             ShareFiles sf = new ShareFiles(Share);
             sf.BeginInvoke(new AsyncCallback(CallBackShare), null);
 
             // 关闭分享按钮
-            isShare = false;
+            isShare = 0;
             button_share.Source = new BitmapImage(
                 new Uri(@"imageAssets/Button_Mainpage_01_unable.png", UriKind.Relative));
 
             label_drag.Content = "上传至服务器...";
 
-        }
-
-        // 学生展示按钮点击事件
-        private void Image_MouseDown_1(object sender, MouseButtonEventArgs e)
-        {
-            
         }
 
         // 拖放事件
@@ -153,13 +178,32 @@ namespace ECWClient
             // 放置到后台
             ssv.SetFiles(files);
             // 开放分享按钮
-            isShare = true;
+            isShare = 1;
             button_share.Source = new BitmapImage(
                 new Uri(@"imageAssets/Button_Mainpage_01.png", UriKind.Relative));
             // 关闭拖放功能
             label_drag.AllowDrop = false;
             label_drag.Content = "已拖放了" + Convert.ToString(files.Length) + "个文件" +
                  Environment.NewLine + "右键取消";
+        }
+
+        // 学生展示按钮点击事件
+        private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
+        {
+            this.Hide();
+            PrePage pp = new PrePage();
+            pp.ShowDialog();
+            this.Show();
+        }
+
+        private void label_drag_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            isShare = 0;
+            ssv.Initialize();
+            button_share.Source = new BitmapImage(
+                new Uri(@"imageAssets/Button_Mainpage_01_unable.png", UriKind.Relative));
+            label_drag.Content = "拖放文件到此处";
+            label_drag.AllowDrop = true;
         }
     }
 }
