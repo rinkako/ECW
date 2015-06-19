@@ -94,22 +94,22 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BackgNew.png" />
+    <Resource Include="imageAssets\BackgNew.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Button_Mainpage_01.png" />
-    <Resource Include="Button_Mainpage_02.png" />
+    <Resource Include="imageAssets\Button_Mainpage_01.png" />
+    <Resource Include="imageAssets\Button_Mainpage_02.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Button_Mainpage_01_unable.png" />
-    <Resource Include="Button_Mainpage_02_unable.png" />
+    <Resource Include="imageAssets\Button_Mainpage_01_unable.png" />
+    <Resource Include="imageAssets\Button_Mainpage_02_unable.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BackGndPre.png" />
+    <Resource Include="imageAssets\BackGndPre.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Button_Predown_01.png" />
-    <Resource Include="Button_Predown_02.png" />
+    <Resource Include="imageAssets\Button_Predown_01.png" />
+    <Resource Include="imageAssets\Button_Predown_02.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
