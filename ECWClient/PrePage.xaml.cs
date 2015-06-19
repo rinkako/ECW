@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
 using System.Net;
 
 namespace ECWClient
@@ -22,13 +23,16 @@ namespace ECWClient
     {
         // 文件列表
         Queue<string> _files = new Queue<string>();
-      
+
+        SynchronizationContext syncContext = null;
+
         // 声明一个委托
         public delegate void AsyncDownLoad();
 
         public PrePage()
         {
             InitializeComponent();
+            syncContext = SynchronizationContext.Current;
             _files.Enqueue("http://easycw-ecw.stor.sinaapp.com/pre_upload_files/url1.txt");
         }
 
@@ -63,12 +67,17 @@ namespace ECWClient
             }
         }
 
+        private void probarRefresh(object text)
+        {
+            probar.Value = Convert.ToDouble(text);
+        }
+
         // 下载
         private void DownLoad()
         {
             // 下载目录
             string downloadPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\\\";
-
+            int oknum = 0, allnum = _files.Count;
             while (_files.Count > 0)
             {
                 // 获取当前下载文件链接
@@ -94,9 +103,9 @@ namespace ECWClient
                             bytesRead = responseStream.Read(bufferBytes, 0, bufferBytes.Length);
                             fs.Write(bufferBytes, 0, bytesRead);
                         } while (bytesRead > 0);
-
                         fs.Flush();
                         fs.Close();
+                        syncContext.Post(probarRefresh, (double)++oknum / (double)allnum * 100);
                     }
                 }
                 catch (Exception e)
@@ -109,7 +118,7 @@ namespace ECWClient
         // 异步回调
         private void CallBackDownload(IAsyncResult result)
         {
-
+            MessageBox.Show("Down Ok");
         }
 
         private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
