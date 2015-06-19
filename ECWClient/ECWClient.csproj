@@ -55,6 +55,9 @@
     <Compile Include="PrePage.xaml.cs">
       <DependentUpon>PrePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SelectClassroom.xaml.cs">
+      <DependentUpon>SelectClassroom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShareService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -69,6 +72,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PrePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectClassroom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

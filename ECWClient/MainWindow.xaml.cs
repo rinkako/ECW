@@ -26,19 +26,33 @@ namespace ECWClient
         // 声明委托
         public delegate string ShareFiles();
         // 标记分享按钮是否可点击
-        bool isShare = false;
+        private bool isShare = false;
+        // 记录课室
+        private string _classroom;
 
         public MainWindow(string classroom)
         {
             InitializeComponent();
             // 设置课室
             label_room.Content = "课室： " + classroom;
+            _classroom = classroom;
             // 允许拖放
             label_drag.AllowDrop = true;
             // 分享按钮不可点击
             isShare = false;
             button_share.Source = new BitmapImage(
-                new Uri(@"Button_Mainpage_01_unable.png", UriKind.Relative));
+                new Uri(@"imageAssets/Button_Mainpage_01_unable.png", UriKind.Relative));
+        }
+
+        private void reset()
+        {
+            // 清空上传文件
+            ssv.Initialize();
+            // 按钮复位
+            isShare = true;
+            button_share.Source = new BitmapImage(
+                new Uri(@"imageAssets/Button_Mainpage_01.png", UriKind.Relative));
+            label_drag.Content = "拖放文件到此处";
         }
 
         // 异步回调函数
@@ -51,7 +65,8 @@ namespace ECWClient
             // 上传成功则显示分享码
             if (res != null)
             {
-
+                MessageBox.Show(res);
+                reset();
             }
         }
 
@@ -63,8 +78,7 @@ namespace ECWClient
             if (ssv.GetFileNum() > 0)
             {
                 // 设置课室
-                string classroom = ((string)label_room.Content);
-                ssv.SetClassroom(classroom.Substring(classroom.IndexOf(' ') + 1));
+                ssv.SetClassroom(_classroom);
                 // 设置时间段
                 ssv.SetTimePeriod(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 // 上传
@@ -76,8 +90,6 @@ namespace ECWClient
                 // 获取分享码
                 shared_code = ssv.GetSharedCode();
             }
-
-            ssv.Initialize();
 
             return shared_code;
         }
@@ -108,14 +120,18 @@ namespace ECWClient
         // 分享按钮点击事件
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // 关闭分享按钮
-            isShare = false;
-            button_share.Source = new BitmapImage(
-                new Uri(@"Button_Mainpage_01_unable.png", UriKind.Relative));
+            if (isShare == false) return;
 
             // 分享文件, 异步上传
             ShareFiles sf = new ShareFiles(Share);
             sf.BeginInvoke(new AsyncCallback(CallBackShare), null);
+
+            // 关闭分享按钮
+            isShare = false;
+            button_share.Source = new BitmapImage(
+                new Uri(@"imageAssets/Button_Mainpage_01_unable.png", UriKind.Relative));
+
+            label_drag.Content = "上传至服务器...";
 
         }
 
@@ -139,10 +155,11 @@ namespace ECWClient
             // 开放分享按钮
             isShare = true;
             button_share.Source = new BitmapImage(
-                new Uri(@"Button_Mainpage_01.png", UriKind.Relative));
+                new Uri(@"imageAssets/Button_Mainpage_01.png", UriKind.Relative));
             // 关闭拖放功能
             label_drag.AllowDrop = false;
-            label_drag.Content = "已拖放了" + Convert.ToString(files.Length) + "个文件";
+            label_drag.Content = "已拖放了" + Convert.ToString(files.Length) + "个文件" +
+                 Environment.NewLine + "右键取消";
         }
     }
 }
