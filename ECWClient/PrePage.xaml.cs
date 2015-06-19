@@ -22,5 +22,20 @@ namespace ECWClient
         {
             InitializeComponent();
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                try
+                {
+                    this.DragMove();
+                }
+                catch (Exception ex)
+                {
+                    // HERE PREVENT STOP BY SUB WIN MOUSE
+                }
+            }
+        }
     }
 }

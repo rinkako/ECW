@@ -89,13 +89,13 @@ namespace ECWClient
             {
                 try
                 {
-                this.DragMove();
-            }
+                    this.DragMove();
+                }
                 catch (Exception ex)
                 {
                     // HERE PREVENT STOP BY SUB WIN MOUSE
                 }
-        }
+            }
         }
 
         // 关闭按钮点击事件
