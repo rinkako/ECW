@@ -52,10 +52,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SelectClassroom.xaml.cs">
-      <DependentUpon>SelectClassroom.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ShareService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +64,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PreDownPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SelectClassroom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
