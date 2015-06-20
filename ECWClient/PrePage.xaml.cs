@@ -35,7 +35,7 @@ namespace ECWClient
         {
             InitializeComponent();
             _postString = postString;
-            MessageBox.Show(_postString);
+            //MessageBox.Show(_postString);
             syncContext = SynchronizationContext.Current;
             getDownloadFiles();
             showDownloadFIles();
