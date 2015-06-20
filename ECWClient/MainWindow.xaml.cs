@@ -202,8 +202,17 @@ namespace ECWClient
         // 学生展示按钮点击事件
         private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
         {
+            // 获取当前时间
+            string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            // hour-minute-second
+            string[] time = (datetime.Split(' ')[1]).Split(':');
+            // convert to minutes
+            int mins = Convert.ToInt32(time[0]) * 60 + Convert.ToInt32(time[1]);
+            // 计算当前时段
+            int period = ssv.CalcTimePeriod(mins);
+            string postString = "cur_period=" + Convert.ToString(period) + "&classroom=" + _classroom;
             this.Hide();
-            PrePage pp = new PrePage();
+            PrePage pp = new PrePage(postString);
             pp.ShowDialog();
             this.Show();
         }

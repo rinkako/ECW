@@ -77,7 +77,7 @@ namespace ECWClient
         public int GetFileNum() { return _file_num; }
 
         // 计算第几节课
-        private int CalcTimePeriod(int mins)
+        public int CalcTimePeriod(int mins)
         {
             int tp = 0;
             for (int i = 8 * 60, j = 0; i < 24 * 60; i += 55, j++)

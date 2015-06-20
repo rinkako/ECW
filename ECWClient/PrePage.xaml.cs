@@ -29,8 +29,12 @@ namespace ECWClient
         // 声明一个委托
         public delegate void AsyncDownLoad();
 
-        public PrePage()
+        private string _postString;
+
+        public PrePage(string postString)
         {
+            _postString = postString;
+            MessageBox.Show(postString);
             InitializeComponent();
             syncContext = SynchronizationContext.Current;
             _files.Enqueue("http://easycw-ecw.stor.sinaapp.com/pre_upload_files/url1.txt");
