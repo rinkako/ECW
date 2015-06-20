@@ -27,17 +27,42 @@ namespace ECWClient
         SynchronizationContext syncContext = null;
 
         // 声明一个委托
-        public delegate void AsyncDownLoad();
-
-        private string _postString;
+        public delegate bool AsyncDownLoad();
 
         public PrePage(string postString)
         {
-            _postString = postString;
-            MessageBox.Show(postString);
             InitializeComponent();
             syncContext = SynchronizationContext.Current;
-            _files.Enqueue("http://easycw-ecw.stor.sinaapp.com/pre_upload_files/url1.txt");
+            getDownloadFiles();
+            showDownloadFIles();
+        }
+
+        // 从服务器获取展示文件
+        private void getDownloadFiles()
+        {
+            WebClient client = new WebClient();
+            client.Encoding = Encoding.UTF8;
+            string address = "http://1.easycw.sinaapp.com/index.php/download/get_pre";
+            string result = client.DownloadString(address);
+            Console.WriteLine(result);
+            string[] filepaths = result.Split('|');
+            for (int i = 0; i < filepaths.Length; i++)
+            {
+                _files.Enqueue(filepaths[i]);
+            }
+
+        }
+
+        // 显示展示文件
+        private void showDownloadFIles()
+        {
+            if (_files.Count == 0) return;
+            textBox_files.Text = "";
+            for (int i = 0; i < _files.Count; i++)
+            {
+                string filepath = _files.ElementAt(i);
+                textBox_files.Text += filepath.Substring(filepath.LastIndexOf('/') + 1) + Environment.NewLine;
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -77,7 +102,7 @@ namespace ECWClient
         }
 
         // 下载
-        private void DownLoad()
+        private bool DownLoad()
         {
             // 下载目录
             string downloadPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\\\";
@@ -115,19 +140,34 @@ namespace ECWClient
                 catch (Exception e)
                 {
                     // 下载出错
+                    return false;
                 }
             }
+            return true;
         }
 
         // 异步回调
         private void CallBackDownload(IAsyncResult result)
         {
-            MessageBox.Show("Down Ok");
+            AsyncDownLoad ad = (AsyncDownLoad)
+                ((System.Runtime.Remoting.Messaging.AsyncResult)result).AsyncDelegate;
+            // 获取异步操作结果
+            bool res = ad.EndInvoke(result);
+            // 上传成功则显示分享码
+            if (res)
+            {
+                syncContext.Post(Fail, "下载完成");
+            }
+            else
+            {
+                syncContext.Post(Fail, "下载失败");
+            }
         }
 
-        private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
+        // fail
+        private void Fail(object o)
         {
-            Environment.Exit(0);
+            MessageBox.Show(Convert.ToString(o));
         }
     }
 }
