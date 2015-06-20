@@ -63,7 +63,8 @@ namespace ECWClient
             string[] filepaths = result.Split('|');
             for (int i = 0; i < filepaths.Length; i++)
             {
-                _files.Enqueue(filepaths[i]);
+                if (filepaths[i] != "")
+                    _files.Enqueue(filepaths[i]);
             }
 
         }
