@@ -219,6 +219,7 @@ namespace ECWClient
 
         private void label_drag_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (isShare == 0 || isShare == 2) return;
             isShare = 0;
             ssv.Initialize();
             button_share.Source = new BitmapImage(

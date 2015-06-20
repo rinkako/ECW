@@ -237,7 +237,7 @@ namespace ECWClient
             // 获取分享码
             WebClient client = new WebClient();
             //client.Encoding = Encoding.UTF8;
-            string address = "http://1.easycw.sinaapp.com/index.php/code_test";
+            string address = "http://1.easycw.sinaapp.com/index.php/upload/client_request_code";
             shared_code = client.DownloadString(address);
 
             // 提交信息到Web服务器
