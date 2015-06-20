@@ -26,12 +26,16 @@ namespace ECWClient
 
         SynchronizationContext syncContext = null;
 
+        private string _postString = null;
+
         // 声明一个委托
         public delegate bool AsyncDownLoad();
 
         public PrePage(string postString)
         {
             InitializeComponent();
+            _postString = postString;
+            MessageBox.Show(_postString);
             syncContext = SynchronizationContext.Current;
             getDownloadFiles();
             showDownloadFIles();
