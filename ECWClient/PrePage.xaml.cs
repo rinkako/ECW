@@ -46,9 +46,20 @@ namespace ECWClient
         {
             WebClient client = new WebClient();
             client.Encoding = Encoding.UTF8;
-            string address = "http://1.easycw.sinaapp.com/index.php/download/get_pre";
-            string result = client.DownloadString(address);
+            // 获取展示url
+            string url = "http://1.easycw.sinaapp.com/index.php/download/get_pre";
+            // 编码
+            byte[] postData = Encoding.UTF8.GetBytes(_postString);
+            // 添加头部信息
+            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            client.Headers.Add("ContentLength", postData.Length.ToString());
+            // 获取返回结果
+            byte[] respondData = client.UploadData(url, "POST", postData);
+            // 返回结果编码
+            string result = Encoding.UTF8.GetString(respondData);
+
             Console.WriteLine(result);
+
             string[] filepaths = result.Split('|');
             for (int i = 0; i < filepaths.Length; i++)
             {
