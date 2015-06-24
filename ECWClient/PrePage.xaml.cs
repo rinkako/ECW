@@ -44,27 +44,35 @@ namespace ECWClient
         // 从服务器获取展示文件
         private void getDownloadFiles()
         {
-            WebClient client = new WebClient();
-            client.Encoding = Encoding.UTF8;
-            // 获取展示url
-            string url = "http://1.easycw.sinaapp.com/index.php/download/get_pre";
-            // 编码
-            byte[] postData = Encoding.UTF8.GetBytes(_postString);
-            // 添加头部信息
-            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            client.Headers.Add("ContentLength", postData.Length.ToString());
-            // 获取返回结果
-            byte[] respondData = client.UploadData(url, "POST", postData);
-            // 返回结果编码
-            string result = Encoding.UTF8.GetString(respondData);
-
-            Console.WriteLine(result);
-
-            string[] filepaths = result.Split('|');
-            for (int i = 0; i < filepaths.Length; i++)
+            try
             {
-                if (filepaths[i] != "")
-                    _files.Enqueue(filepaths[i]);
+                WebClient client = new WebClient();
+                client.Encoding = Encoding.UTF8;
+                // 获取展示url
+                string url = "http://1.easycw.sinaapp.com/index.php/download/get_pre";
+                // 编码
+                byte[] postData = Encoding.UTF8.GetBytes(_postString);
+                // 添加头部信息
+                client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                client.Headers.Add("ContentLength", postData.Length.ToString());
+                // 获取返回结果
+                byte[] respondData = client.UploadData(url, "POST", postData);
+                // 返回结果编码
+                string result = Encoding.UTF8.GetString(respondData);
+
+                Console.WriteLine(result);
+
+                string[] filepaths = result.Split('|');
+                for (int i = 0; i < filepaths.Length; i++)
+                {
+                    if (filepaths[i] != "")
+                        _files.Enqueue(filepaths[i]);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("网络连接失败");
+                return;
             }
 
         }
