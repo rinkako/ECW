@@ -12,5 +12,6 @@
         <Label Name="label_drag" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="拖放文件到此处" Margin="135,206,65,0" VerticalAlignment="Top" FontSize="16" Height="128" Foreground="#FF1C95CD" Drop="label_drag_Drop" MouseRightButtonDown="label_drag_MouseRightButtonDown"/>
         <Label Name="label_room" Content="课室：C101" HorizontalAlignment="Left" Margin="190,132,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF00ACFD"/>
         <Label Content="第11周  数据库系统原理" HorizontalAlignment="Left" Margin="190,162,0,0" VerticalAlignment="Top" FontSize="15" Foreground="#FF00ACFD"/>
+        <Label Name="hint" Visibility="Hidden" Content="请在easycw.sinaapp.com下载" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="114,304,0,0" VerticalAlignment="Top" Width="405" FontSize="16"/>
     </Grid>
 </Window>

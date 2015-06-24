@@ -59,6 +59,7 @@ namespace ECWClient
             label_drag.Content = Convert.ToString(text);
             label_drag.Foreground = new SolidColorBrush(Colors.Red);
             label_drag.FontSize = 28;
+            hint.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void Fail(object o)
@@ -151,6 +152,7 @@ namespace ECWClient
                 label_drag.AllowDrop = true;
                 button_share.Source = new BitmapImage(
                 new Uri(@"imageAssets/Button_Mainpage_01_unable.png", UriKind.Relative));
+                hint.Visibility = System.Windows.Visibility.Hidden;
                 return;
             }
 
