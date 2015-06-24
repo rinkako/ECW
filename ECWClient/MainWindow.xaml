@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Easy Courseware" Height="450" Width="564" AllowsTransparency="True" Background="Transparent" WindowStyle="None"
         MouseDown="Window_MouseDown"
-        Topmost="True" ResizeMode="NoResize">
+        Topmost="True" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <Image Source="imageAssets/BackgNew.png" RenderTransformOrigin="0.5,0.5"/>
+        <Image Source="imageAssets/BackgNew.png" RenderTransformOrigin="1,0"/>
         <Button Name="Button_close" Click="Button_close_Click" Content="" HorizontalAlignment="Left" Margin="482,104,0,0" VerticalAlignment="Top" Width="37" Height="37" Opacity="0"/>
         <Image Name="button_share" HorizontalAlignment="Left" MouseDown="Image_MouseDown" Height="38" Margin="253,359,0,0" VerticalAlignment="Top" Width="141" Source="imageAssets/Button_Mainpage_01.png"/>
         <Image MouseDown="Image_MouseDown_2" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="100" Margin="399,359,0,0" Source="imageAssets/Button_Mainpage_02.png"/>
