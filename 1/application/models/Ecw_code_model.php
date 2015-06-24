@@ -3,11 +3,7 @@
  * 提取码模型类
  * @author Rinka
  */
-class Ecw_code_model extends CI_Model {
-	function __construct() {
-		parent::__construct();
-	}
-
+class ecw_code_model extends CI_Model {
  	/**
 	 * 加入一条新的分享
 	 * @param paras - 参数列表

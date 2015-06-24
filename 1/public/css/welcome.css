@@ -1,0 +1,170 @@
+body {
+	background: url(/public/img/bg.jpg) no-repeat center center fixed;
+	background-size: auto 105%;
+	padding: 0;
+	border: 0;
+	color: black;
+	font-family: "微软雅黑", "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.navbar {
+	background: url(/public/img/nav.png);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 130px;
+	padding-left: 140px;
+}
+
+.navbar span {
+	font-size: 50px;
+	color: #5bb4f1;
+}
+
+.navbar li {
+	margin-right: 55px;
+	width: 60px;
+	font-size: 13px;
+}
+
+.nav *{
+	float: left;
+}
+
+.nav-item a {
+	color: black;
+}
+
+.nav li a:hover, .nav li a:active, .nav li a:focus {
+	background: inherit;
+}
+
+.nav li a span, .nav li a span, .nav li a span {
+	padding-bottom: 5px;
+}
+
+.nav li a span:hover, .nav li a span:active, .nav li a span:focus {
+	color: gray;
+}
+
+.nav>li>a {
+	font-size: 13px;
+	padding:inherit;
+	color: black;
+}
+
+.description {
+	width: 100%;
+	padding-top: 50px;
+	padding-left: 130px;
+	padding-right: 100px;
+}
+
+.description > .desc-name {
+	text-align: left;
+}
+
+.description > .desc-name {
+	text-align: left;
+}
+
+.description > .desc-name {
+	text-align: right;
+}
+
+.body {
+	padding-top: 300px;
+}
+
+.window-fetch {
+
+}
+
+.window-line {
+	width: 100%;
+  	height: 50px;
+}
+
+.window-dialog {
+	position: relative;
+	width: 400px;
+  	margin: 30px auto;
+}
+
+.window-header, .window-footer {
+  border: none;
+  border-radius: 0;
+}
+
+.window-header {
+  padding: 15px;
+  border-bottom: 1px solid #BBB;
+  min-height: 16.42857143px;
+}
+
+.window-content {
+  -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0,0,0,0.5);
+  box-shadow: 0 3px 9px rgba(0,0,0,0.5);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  outline: 0;
+
+}
+
+.window-addon {
+	background: gray;
+	color: white;
+}
+
+.window-title {
+	  margin: 0;
+  line-height: 1.42857143;
+}
+
+
+.window-body {
+	position: relative;
+  	padding: 20px;
+  	padding-bottom: 0px;
+}
+
+.window-footer {
+  padding: 20px;
+  padding-top: 0px;
+  text-align: center;
+}
+
+.form-control {
+  border: 0px solid transparent;
+}
+
+.body-left, .body-right {
+	position: absolute;
+}
+
+.body-left {
+	left: 0;
+}
+
+.body-right {
+	right: 0;
+}
+
+.body-left {
+	padding-left: 100px;
+}
+
+.desc-title {
+	font-size: 30px;
+}
+
+.window-result {
+	display: none;
+}
