@@ -3,11 +3,7 @@
  * 学生展示模型类
  * @author Rinka
  */
-class Ecw_pre_model extends CI_Model {
-	function __construct() {
-		parent::__construct();
-	}
-
+class ecw_pre_model extends CI_Model {
  	/**
 	 * 加入一个新的展示记录
 	 * @param paras - 参数列表
@@ -66,7 +62,7 @@ class Ecw_pre_model extends CI_Model {
 	 */
 	public function get_pre_by_week($courseId, $currentWeek) {
 		if (isset($courseId) and isset($currentWeek)) {
-			$this->db->where(array('cid'=>$courseId, 'week'=>'currentWeek', 'status'=>0));
+			$this->db->where(array('cid'=>$courseId, 'week'=>$currentWeek, 'status'=>0));
 			return $this->db->get('ecw_pres')->result();
 		}
 		else {

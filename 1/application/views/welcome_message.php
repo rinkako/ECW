@@ -2,115 +2,98 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
 
-	<style type="text/css">
 
-	::selection{ background-color: #E13300; color: white; }
-	::moz-selection{ background-color: #E13300; color: white; }
-	::webkit-selection{ background-color: #E13300; color: white; }
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
+	<title>ECW课件分享系统</title>
+    <!-- Bootstrap -->
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
 
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body{
-		margin: 0 15px 0 15px;
-	}
-	
-	p.footer{
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-	
-	#container{
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		-webkit-box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<link href="/public/css/message.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-<div id="container">
-	<h1>Welcome to CodeIgniter For SinaAppEngine!</h1>
 
-	<div id="body">
-		<p>欢迎使用CodeIgniter 2.1.3 For SAE</p>
+	<?php $this->load->view('nav');?>
 
-		<p>此CI框架适应SAE环境，主要修改如下：&nbsp;&nbsp; <?=anchor('welcome/log','更多修改日志&amp;代码示例')?></p>
-		<code>
-		1.Mysql数据库 进行了读写的主从分离（主库写、从库读）<br>
-		2.数据缓存 与 页面缓存 支持memcache和kvdb两种方式<br>
-		3.Email类 使用原生SAE的邮件类<br>
-		4.文件上传类 使用Storage保存<br>
-		5.图像处理类 仅支持GD2函数<br>
-		6.验证码类 使用原生SAE的Vcode类<br>
-		7.日志类 使用原生SAE日志中心<br>
-		</code>
-		
-		<p>若需隐藏index.php，在config.yaml中添加以下代码，且修改配置文件 $config['index_page'] = '';</p>
-		<code>
-			handle:<br>&nbsp;&nbsp;- rewrite: if(!is_dir() &amp;&amp; !is_file() &amp;&amp; path~"/") goto "/index.php/%{QUERY_STRING}"
-		</code>
+	<div class="body">
+		<div class="window-search">
+		  <div class="body-left">
+		  		<div class="description">
+		  			<div class="desc-name">Easy courseware</div>
+		  			<div class="desc-title">中山大学课件便捷分享系统</div>
+		  			<div class="desc-info">SYSU COURSE SHARE PROJECT</div>
+		  		</div>
+		  </div>
 
-		<p>测试页面</p>
-		<code>
-			<?=anchor('welcome/cache','数据缓存',array('target'=>'_blank'))?>&nbsp;&nbsp;
-			<?=anchor('upload/index','文件上传',array('target'=>'_blank'))?>&nbsp;&nbsp;
-			<?=anchor('welcome/vcode','验证码',array('target'=>'_blank'))?>&nbsp;&nbsp;
-		</code>
-		
-		<p>CI手册</p>
-		<code>
-		<a href="http://ellislab.com/codeigniter/user-guide/index.html" target="_blank">英文版</a>&nbsp;&nbsp;
-		<a href="http://codeigniter.org.cn/user_guide/index.html" target="_blank">中文版</a>&nbsp;&nbsp;
-		<a href="http://www.kuaipan.cn/file/id_11486280147820426.htm" target="_blank">中文CHM版</a>
-		</code>
-		<p>相关链接</p>
-		<code>
-			<a href="http://codeigniter.org.cn/" target="_blank">CI中国</a>&nbsp;&nbsp;
-			<a href="http://codeigniter.org.cn/forums/forum.php" target="_blank">CI开发者社区</a>&nbsp;&nbsp;
-			<a href="http://sae.sina.com.cn/" title="SinaAppEngine" target="_blank"><img src="http://static.sae.sina.com.cn/image/poweredby/117X12px.gif"></a> 
-		</code>
-	</div>
+		  <div class="body-right">
+				<div class="window-fetch">
+	                <div class="window-dialog">
+	                  <div class="window-content">
+	                    <div class="window-header">
+	                      <h4 class="window-title">提取课件 <span class="window-tips"b></span></h4>
+	                    </div>
+	                    <div class="window-body">
+			                <div class="form-group">
+			                  <div class="input-group">
+			                    <span class="input-group-addon window-addon"><span class="glyphicon glyphicon-save"></span></span>
+			                    <input type="text" id="input-code" name="cwcode" class="form-control" placeholder="输入ECW Code提取课件">
+			                  </div>
+			                </div>
+			                <div class="window-footer">
+	                      		<button type="submit" id="fetch-btn" name="submit" class="btn btn-primary">提取</button>
+	                    	</div>
+	                    </div>
+	                    
+	                  </div>
+	                </div>
+	              </div>
+	        </div>
+		</div>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-</div>
+  	</div>
 
+	<div class="window-result">
+      <div class="result-fetch">
+        <div class="result-dialog">
+          <div class="result-content">
+            <div class="result-header">
+              <div class="result-title">
+                <span class="glyphicon glyphicon-file file"></span>
+                <p class="result-name"></p>
+              </div>
+              <div class="result-footer">
+                <div><p class="result-classroom"></p><p class="result-cname"></p><p class="result-time"></p></div>
+                <button type="button" class="result-download btn btn-primary">下载</button>
+              </div>
+            </div>
+            <div class="result-body">
+              <div class="result-comments">
+              </div>
+
+              <div class="input-group input-comment result-input-group">
+                <input class="new-comment form-control" style="height:51px" type="text">
+                <input type="button" class="result-comment-btn btn btn-primary" value="评论" />
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+   </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/public/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/public/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/public/js/welcome.js"></script>
 </body>
 </html>

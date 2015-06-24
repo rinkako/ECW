@@ -3,11 +3,7 @@
  * 评论模型类
  * @author Rinka
  */
-class Ecw_comment_model extends CI_Model {
-	function __construct() {
-		parent::__construct();
-	}
-
+class ecw_comment_model extends CI_Model {
  	/**
 	 * 加入新评论
 	 * @param paras - 参数列表
@@ -100,7 +96,7 @@ class Ecw_comment_model extends CI_Model {
 	 * 删除某分享下所有评论
 	 * @param codeId - 分享id
 	 */
-	public function delete_comment_by_ip($codeId) {
+	public function delete_comment_by_code($codeId) {
 		if(isset($codeId)) {
 			$this->db->where(array('id'=>$codeId));
 			$this->db->update('ecw_comments', array('status'=>1));

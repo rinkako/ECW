@@ -3,11 +3,7 @@
  * 课程模型类
  * @author Rinka
  */
-class Ecw_course_model extends CI_Model {
-	function __construct() {
-		parent::__construct();
-	}
-
+class ecw_course_model extends CI_Model {
  	/**
 	 * 加入一个新的课程
 	 * @param paras - 参数列表
@@ -109,13 +105,15 @@ class Ecw_course_model extends CI_Model {
 
 	/**
 	 * 当前时间当前课室是什么课 
-	 * @param currentTimePeriod - 当前时间段
+	 * @param currentWeekday - 当前星期几(1-7)
+	 * @param currentTimePeriod - 当前时间段(1-15)
 	 * @param currentRoom - 当前课室
 	 * @return 课程id
 	 */
-	public function get_course_by_time_room($currentTimePeriod, $currentRoom) {
-		if (isset($currentTimePeriod) and isset($currentRoom)) {
-			$sqlquery = $this->db->query('SELECT * FROM ecw_courses WHERE status = 0 AND classroom = $currentRoom AND startPeriod <= $currentTimePeriod AND endPeriod >= $currentTimePeriod');
+	public function get_course_by_time_room($currentWeekday, $currentTimePeriod, $currentRoom) {
+		if (isset($currentTimePeriod) and isset($currentRoom) and isset($currentWeekday)) {
+			$t = 'SELECT * FROM ecw_courses WHERE status = 0 AND classroom = \''. $currentRoom . '\' AND startPeriod <= ' . $currentTimePeriod . ' AND endPeriod >= ' . $currentTimePeriod . ' AND ' . $currentWeekday . ' = weekday';
+			$sqlquery = $this->db->query($t);
 			$dataarr = $sqlquery->result();
 			return $dataarr[0]->cid;
 		}

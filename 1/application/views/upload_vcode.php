@@ -29,18 +29,22 @@
 				<div class="window-fetch">
 	                <div class="window-dialog">
 	                  <div class="window-content">
+	                    <div class="window-header">
+	                      <h4 class="window-title" style="color:orange;">课件分享码为</h4>
+	                    </div>
 	                    <div class="window-body">
 							<form class="bs-component">
 			                <div class="form-group">
 			                  <div class="input-group">
-			                    <span class="input-group-addon window-addon"><span class="glyphicon glyphicon-ok"></span></span>
-			                    <div class="window-success">上传成功</div>
+			                    <span class="input-group-addon window-addon"><span class="glyphicon glyphicon-save"></span></span>
+			                    <texarea type="text" class="form-control" >5EF67CZ</texarea>
 			                  </div>
 			                </div>
 			                </form>
 	                    </div>
-	                    <div >
-	                      <p>在对应展示周时，课程所在的课室用户端将可以下载你的课件</p>
+	                    <div class="window-footer">
+	                      <button type="button" class="btn btn-primary">复制</button>
+	                      <p>请在ecw.sinaapp.com下载</p>
 	                    </div>
 	                  </div>
 	                </div>

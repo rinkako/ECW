@@ -54,7 +54,7 @@ class SAE_Upload {
 
 	protected $_file_name_override	= '';
 		
-	//SAE ╩Я╣цвНжунд╪ЧURL
+	//SAE О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д╪О©╫URL
 	protected $sae_storage_fileurl;
     
 	var $CI;
@@ -330,7 +330,7 @@ class SAE_Upload {
 		}
 		*/
 		 
-		//SAE п╢хКStorageё╛ ╥╣╩ьнд╪Чurl╣ьж╥
+		//SAE п╢О©╫О©╫StorageО©╫О©╫ О©╫О©╫О©╫О©╫О©╫д╪О©╫urlО©╫О©╫ж╥
 		$save_file = s_write( $this->upload_path.$this->file_name, file_get_contents($this->file_temp));
 		if($save_file === FALSE){
 			return FALSE;
@@ -412,7 +412,7 @@ class SAE_Upload {
 			mt_srand();
 			$filename = md5(uniqid(mt_rand())).$this->file_ext;
 		}
-		//SAE еп╤онд╪Чйг╥Я╢Фтз
+		//SAE О©╫п╤О©╫О©╫д╪О©╫О©╫г╥О©╫О©╫О©╫О©╫
 		if( ! s_file_exists($path.$filename) ){
 			return $filename;
 		}
