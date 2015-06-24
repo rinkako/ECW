@@ -80,7 +80,7 @@
               </div>
 
               <div class="input-group input-comment result-input-group">
-                <input class="new-comment form-control" style="height:51px" type="text">
+                <input id="input-comment" class="new-comment form-control" style="height:51px" type="text">
                 <input type="button" class="result-comment-btn btn btn-primary" value="评论" />
               </div>
             </div>

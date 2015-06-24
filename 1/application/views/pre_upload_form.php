@@ -28,7 +28,7 @@
 				<div class="window-fetch">
 	                <div class="window-dialog">
 	                  <div class="window-content">
-	                  <?php echo form_open_multipart('/upload/pre_upload');?>
+	                  <?php echo form_open_multipart('/upload/pre_upload', array('id' => 'upload-form'));?>
 	                    <div class="window-header">
 	                      <div class="window-description">
 	                        <p>课室</p>
@@ -69,7 +69,7 @@
 	                        <p>作者</p>
 	                      </div>
 	                      <div class="window-select">
-	                        <textarea id="input-author" name="pre_author" style="width:250px;" rows="1"></textarea>
+	                        <input id="input-author" name="pre_author" style="width:250px;" rows="1" />
                            </div>
 	                    </div>
 	                        
@@ -78,7 +78,7 @@
 	                        <p>文件备注</p>
 	                      </div>
 	                      <div class="window-select">
-	                         <textarea id="input-mark" name="pre_remark" style="width:250px;" rows="1"></textarea>
+	                         <input id="input-mark" name="pre_remark" style="width:250px;" rows="1" />
                            </div>
 	                    </div>
 	                    
@@ -102,6 +102,7 @@
     <script src="/public/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/public/js/pre_upload.js"></script>
 	<script type="text/javascript" src="/public/js/ajaxfileupload.js"></script>
+	<script type="text/javascript" src="/public/js/jquery.form.js"></script>
 </body></html>
 
 <!---

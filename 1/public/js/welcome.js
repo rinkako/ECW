@@ -1,9 +1,15 @@
+
+
 $(function(){
 	$(".window-result").hide();
 
     $(document).bind('keypress', function(e) {
         if(e.keyCode==13){
-             $(".result-comment-btn").trigger('click');
+        	if (document.activeElement.id == "input-code") {
+            	$("#fetch-btn").trigger("click");
+        	} else if (document.activeElement.id == "input-comment"){
+        		$(".result-comment-btn").trigger('click');
+        	}
          }
     });
 	

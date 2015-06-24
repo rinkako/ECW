@@ -1,6 +1,6 @@
 body {
-	background: url(/public/img/bg.jpg) no-repeat center center fixed;
-	background-size: auto 105%;
+	background: url(/public/img/bg.jpg);
+	background-size: cover;
 	padding: 0;
 	border: 0;
 	color: black;

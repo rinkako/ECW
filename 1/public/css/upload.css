@@ -1,6 +1,6 @@
 body {
-	background: url(/public/img/bg.jpg) no-repeat center center fixed;
-	background-size: auto 105%;
+	background: url(/public/img/bg.jpg);
+	background-size: cover;
 	padding: 0;
 	border: 0;
 	color: black;
@@ -150,8 +150,6 @@ body {
 .window-upload {
 	text-align:center;
 	color:#00F;
-	height: 150px;
-	line-height:150px;
 }
 .form-control {
   border: 0px solid transparent;
@@ -190,4 +188,15 @@ body {
 .window-success, .window-tips {
 	text-align: center;
 	width: 100%;
+}
+
+.upload-zone p {
+  min-height: 150px;
+  text-align: center;
+  padding: 40px;
+  word-wrap: break-word;
+}
+
+textarea {
+	  resize: none;
 }

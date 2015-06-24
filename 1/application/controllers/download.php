@@ -107,11 +107,13 @@ Class download extends CI_Controller {
 			echo "mc init failed\n";
 			return false;
 		}
-		// memcache击中，直接从memcache获取数据, key为$cwcode
 		$value = memcache_get($mmc, $cwcode);
+		var_dump($value);
 		if ($value == false) {
 			return false;
 		}
+		
+		// memcache击中，直接从memcache获取数据, key为$cwcode
 		// value = "share_id#share_name#share_time#original_uri#classroom#course_name"
 		$tokens = explode('#', $value);
 		$share_id = $tokens[0];
