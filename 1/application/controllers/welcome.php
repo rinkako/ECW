@@ -93,7 +93,7 @@ class Welcome extends CI_Controller {
 	public function log(){
 		$this->load->view('welcome_log');
 	}
-		
+
 	//图像处理 测试
 	/*public function imagetest(){
 		$config['source_image'] = 'public/test/old.jpg';
