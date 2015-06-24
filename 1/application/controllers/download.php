@@ -29,12 +29,15 @@ Class download extends CI_Controller {
 			$paras['time'] = date('Y-m-d H:i:s');
 			// 插入新评论
 			$this->ecw_comment_model->create_comment($paras);
-
 			echo json_encode(array("status" => true, "msg" => "评论发表成功", "time" => $paras['time']));
 			return;
 		}
-		
 		$cwcode = $_POST['cwcode'];
+		// 先查memcache
+		if ($this->get_from_mem($cwcode) == true)
+			return;	
+		
+		// memcache中没有记录，则查数据库
 		// 获取分享
 		$share = $this->ecw_code_model->get_cwcode($cwcode);
 		if (!$share) {
@@ -42,7 +45,6 @@ Class download extends CI_Controller {
 			echo json_encode(array("status" => false, "msg" => $error));
 			return;
 		} else {
-
 			// 获取评论
 			$share_id = $share[0]->id;
 			$comments = $this->ecw_comment_model->get_comment($share_id);
@@ -58,6 +60,7 @@ Class download extends CI_Controller {
 				$new_list[] = rawurlencode(mb_convert_encoding($dir, 'gb2312', 'utf-8'));
 			}
 			$share_uri = 'ftp://' . FTP_USERNAME . ':' . FTP_PASSWORD . '@' . implode('/', $new_list);
+			// 分享信息
 			$paras['share_id'] = $share_id;
 			$paras['share_code'] = $cwcode;
 			$paras['share_uri'] = $share_uri;
@@ -68,7 +71,6 @@ Class download extends CI_Controller {
 			$paras['classroom'] = $course->classroom;
 			$paras['course_name'] = $course->name;
 			$paras['share_time'] = $share[0]->time;
-
 			echo json_encode(array("status" => true, "msg" => "分享码有效", "data" => $paras));
 		}
 	}
@@ -96,6 +98,48 @@ Class download extends CI_Controller {
 				echo $pres[$i]->uri . '|';
 			}
 		}
+	}
+	
+	/* 从memcache获取数据 */
+	private function get_from_mem($cwcode) {
+		$mmc = memcache_init();
+		if($mmc == false) {
+			echo "mc init failed\n";
+			return false;
+		}
+		// memcache击中，直接从memcache获取数据, key为$cwcode
+		$value = memcache_get($mmc, $cwcode);
+		if ($value == false) {
+			return false;
+		}
+		// value = "share_id#share_name#share_time#original_uri#classroom#course_name"
+		$tokens = explode('#', $value);
+		$share_id = $tokens[0];
+		$share_name = $tokens[1];
+		$share_time = $tokens[2];
+		$original_uri = $tokens[3];
+		$classroom = $tokens[4];
+		$course_name = $tokens[5];
+		// 对uri转义
+		$dirs = explode('/', substr($original_uri, 6));
+		foreach ($dirs as $dir) {
+			$new_list[] = rawurlencode(mb_convert_encoding($dir, 'gb2312', 'utf-8'));
+		}
+		$share_uri = 'ftp://' . FTP_USERNAME . ':' . FTP_PASSWORD . '@' . implode('/', $new_list);
+		// 分享信息
+		$paras['share_id'] = $share_id;
+		$paras['share_code'] = $cwcode;
+		$paras['share_uri'] = $share_uri;
+		$paras['share_name'] = $share_name;
+		// 评论信息
+		$comments = $this->ecw_comment_model->get_comment($share_id);
+		$paras['comments'] = $comments;
+		// 课程信息
+		$paras['classroom'] =$classroom;
+		$paras['course_name'] = $course_name;
+		$paras['share_time'] = $share_time;
+		echo json_encode(array("status" => true, "msg" => "分享码有效", "data" => $paras));
+		return true;
 	}
 	
 	/* 计算当前周数 */

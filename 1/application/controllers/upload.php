@@ -127,7 +127,7 @@ Class upload extends CI_Controller {
 		// 创建分享的参数列表
 		if (!isset($_POST['uri']) || !isset($_POST['cwcode']) || !isset($_POST['cwname']) || 
 				!isset($_POST['classroom']) || !isset($_POST['cur_period'])) {
-			echo 'Something wrong!';
+			echo 'POST paras lost!';
 		}
 		$code_paras['uri'] = $_POST['uri'];
 		$code_paras['code'] = $_POST['cwcode'];
@@ -150,12 +150,45 @@ Class upload extends CI_Controller {
 		echo $cid.'<br/>';
 		// 创建新分享
 		$insert_id = $this->ecw_code_model->create_cwcode($code_paras);
+		
+		// 写入memcache
+		// value = "share_id#share_name#share_time#original_uri#classroom#course_name"
+		$course = $this->ecw_course_model->get_course($cid);
+		$course_name = $course->name;
+		$key = $_POST['cwcode'];
+		$value = $insert_id.'#'.$_POST['cwname'].'#'.$code_paras['time'].'#'.
+			$_POST['uri'].'#'.$_POST['classroom'].'#'.$course_name;
+		$mmc = memcache_init();
+		if($mmc == false)
+			echo "mc init failed\n";
+		else {
+			memcache_set($mmc, $key, $value);
+		}
 	}
 	
 	/* 客户端请求提取码 */
 	public function client_request_code() {
 		$code = $this->generate_code(6);
 		echo $code;
+	}
+	
+	/* 客户端请求课程名称 */
+	public function client_request_cname() {
+		if (isset($_POST['classroom']) && isset($_POST['cur_period'])) {
+			$cur_classroom = $_POST['classroom'];
+			$cur_period = $_POST['cur_period'];
+			$cur_weekday = date("w") == 0 ? 7 : date("w");
+			// 获取课程id
+			$cid = $this->ecw_course_model->get_course_by_time_room($cur_weekday, $cur_period, $cur_classroom);
+			if (!$cid){
+				// cid为1表示公共容错课程
+				$cid = 1;
+			}
+			$course = $this->ecw_course_model->get_course($cid);
+			$course_name = $course->name;
+			$cur_week = $this->cal_week();
+			echo $cur_week.'|'.$course_name;
+		}
 	}
 	
 	/* 获取课件提取码 */
@@ -202,7 +235,9 @@ Class upload extends CI_Controller {
 	
 	/* 计算当前周数 */
 	private function cal_week() {
+		// 周日为一周的第一天
 		$cur_week = date('W') - 9;
+		$cur_week = date("w") == 0 ? $cur_week + 1 : $cur_week;
 		return $cur_week;
 	}
 
