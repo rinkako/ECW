@@ -21,7 +21,7 @@ Class upload extends CI_Controller {
 		$this->load->view('pre_upload_form', array("roomList" => $classrooms));	
 	}
 	
-	/* 课件上传     需要课件上传表单数� */
+	/* 课件上传     需要课件上传表单数据  */
 	public function cw_upload() {
 		//$classroom = $_POST['classroom'];
 		
@@ -42,7 +42,7 @@ Class upload extends CI_Controller {
 // 		var_dump($t);
 		
 
-// 		$this->ftp->upload('C:/Users/�Desktop/新建文本文档.txt', 'frproot/C�C102/'.$cwname, 'ascii', 0775);	
+// 		$this->ftp->upload('C:/Users/伟/Desktop/新建文本文档.txt', 'frproot/C栋/C102/'.$cwname, 'ascii', 0775);	
 // 		$this->ftp->close();
 
 		$conn_id = ftp_connect('222.200.172.5/ecwroot') or die("Couldn't connect");
@@ -63,12 +63,12 @@ Class upload extends CI_Controller {
 // 			$para['status'] = 0;
 // 			$para['beginat'] = ;	
 // 			$this->ecw_code_model->create_cwcode($para);
-// 			// 返回一个课件分享码到上传成功页�
+// 			// 返回一个课件分享码到上传成功页面
 // 			$this->load->view('ecw_upload_success', $code);
 // 		}
 	}
 	
-	/* 展示上传     需要展示上传表单数�*/
+	/* 展示上传     需要展示上传表单数据 */
 	public function pre_upload() {
 		if (isset($_POST['classroom']) && !isset($_POST['course_name'])) {
 			$classroom = $_POST['classroom'];
@@ -99,7 +99,7 @@ Class upload extends CI_Controller {
 				// print_r($error);
 				$this->load->view('pre_upload_form', array('error' => $error ));
 			} else {
-				// data包含所上传文件的信�
+				// data包含所上传文件的信息
 				$data = array('upload_data' => $this->upload->data());
 				//上传文件成功后的URL路径
 				$pre_paras['uri'] =  $data['upload_data']['file_url'];
@@ -110,7 +110,7 @@ Class upload extends CI_Controller {
 				$pre_paras['week'] = $pre_week;
 				$pre_paras['cid'] = $course_id;
 				$pre_paras['time'] = date('Y-m-d H:i:s');
-				// 将新pre记录写入数据�
+				// 将新pre记录写入数据库
 				$res = $this->ecw_pre_model->create_pre($pre_paras);
 				if (!$res) {
 					$error = array('error' => 'Fail to create the new pre record in database!');
@@ -121,13 +121,16 @@ Class upload extends CI_Controller {
 			}		
 		} 
 	}
+
+	public function pre_upload_success() {
+		$this->load->view('pre_upload_success');
+	}
 	
-	/* 客户端上�*/
+	/* 客户端上传 */
 	public function client_upload() {
-		// 创建分享的参数列�
+		// 创建分享的参数列表
 		if (!isset($_POST['uri']) || !isset($_POST['cwcode']) || !isset($_POST['cwname']) || 
 				!isset($_POST['classroom']) || !isset($_POST['cur_period'])) {
-			echo 'POST paras lost!';
 			echo 'POST paras lost!';
 		}
 		$code_paras['uri'] = $_POST['uri'];
@@ -144,19 +147,13 @@ Class upload extends CI_Controller {
 		$cid = $this->ecw_course_model->get_course_by_time_room($cur_weekday, $cur_period, $cur_classroom);
 		if (!$cid){
 			echo 'get cid failed! '.'<br/>'.'change to public course.';
-			// cid�表示公共容错课程
+			// cid为1表示公共容错课程
 			$cid = 1;
 		}
 		$code_paras['cid'] = $cid;
 		echo $cid.'<br/>';
-		// 创建新分�
+		// 创建新分享
 		$insert_id = $this->ecw_code_model->create_cwcode($code_paras);
-		
-		// 写入memcache
-		// value = "share_id#share_name#share_time#original_uri#classroom#course_name"
-		$course = $this->ecw_course_model->get_course($cid);
-		$course_name = $course->name;
-		$key = $_POST['cwcode'];
 		
 		// 写入memcache
 		// value = "share_id#share_name#share_time#original_uri#classroom#course_name"
@@ -179,7 +176,7 @@ Class upload extends CI_Controller {
 		echo $code;
 	}
 	
-	/* 客户端请求课程名�*/
+	/* 客户端请求课程名称 */
 	public function client_request_cname() {
 		if (isset($_POST['classroom']) && isset($_POST['cur_period'])) {
 			$cur_classroom = $_POST['classroom'];
@@ -188,7 +185,7 @@ Class upload extends CI_Controller {
 			// 获取课程id
 			$cid = $this->ecw_course_model->get_course_by_time_room($cur_weekday, $cur_period, $cur_classroom);
 			if (!$cid){
-				// cid�表示公共容错课程
+				// cid为1表示公共容错课程
 				$cid = 1;
 			}
 			$course = $this->ecw_course_model->get_course($cid);
@@ -198,7 +195,7 @@ Class upload extends CI_Controller {
 		}
 	}
 	
-	/* 获取课件提取�*/
+	/* 获取课件提取码 */
 	public function generate_code($length = 6) {
 		// 密码字符集，可任意添加需要的字符
 		$chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
@@ -207,8 +204,8 @@ Class upload extends CI_Controller {
 			for ( $i = 0; $i < $length; $i++ ) {
 				// 这里提供两种字符获取方式
 				// 第一种是使用 substr 截取$chars中的任意一位字符；
-				// 第二种是取字符数�$chars 的任意元�
-				// $code .= substr($chars, mt_rand(0, strlen($chars) �1), 1);
+				// 第二种是取字符数组 $chars 的任意元素
+				// $code .= substr($chars, mt_rand(0, strlen($chars) – 1), 1);
 				$code .= $chars[ mt_rand(0, strlen($chars) - 1) ];
 			}
 			$res = $this->ecw_code_model->get_cwcode($code);
@@ -216,7 +213,7 @@ Class upload extends CI_Controller {
 		return $code;
 	}
 	
-	/* 获取所有课室列�*/
+	/* 获取所有课室列表 */
 	private function get_classrooms() {
 		$classrooms = array('A101', 'A102', 'A103', 'A104', 'A105', 'A201', 'A202', 
 				            'A203', 'A204', 'A205', 'A206', 'A207', 'A301', 'A302', 
@@ -242,10 +239,8 @@ Class upload extends CI_Controller {
 	
 	/* 计算当前周数 */
 	private function cal_week() {
-		// 周日为一周的第一�
-		// 周日为一周的第一�
+		// 周日为一周的第一天
 		$cur_week = date('W') - 9;
-		$cur_week = date("w") == 0 ? $cur_week + 1 : $cur_week;
 		$cur_week = date("w") == 0 ? $cur_week + 1 : $cur_week;
 		return $cur_week;
 	}
